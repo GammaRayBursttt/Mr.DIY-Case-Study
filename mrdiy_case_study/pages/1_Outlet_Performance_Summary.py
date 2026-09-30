@@ -7,9 +7,11 @@ import math
 import numpy as np
 from scipy.stats import pearsonr
 from plotly.subplots import make_subplots
+from pathlib import Path
 
 # ==========2. Constant==========
 raw_data_file="packing_test.xlsx"
+DATA_PATH = Path(__file__).parent / "packing_test.xlsx"
 max_rows=2638
 year=2025
 header=""
@@ -141,8 +143,9 @@ efficiency_note_packer = (
 )
 
 # ==========3. Data==========
-def load_data(path: str = raw_data_file) -> pd.DataFrame:
-    return pd.read_excel(path).iloc[:max_rows]
+@st.cache_data
+def load_data(max_rows=10000):
+    return pd.read_excel(DATA_PATH).iloc[:max_rows]
 
 def rename_columns(df: pd.DataFrame):
     return df.rename(columns=df_column_map)
