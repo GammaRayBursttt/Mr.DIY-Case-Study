@@ -163,9 +163,10 @@ with st.container(border=True):
     ref = build_reference(df)
 
     m1, m2 = st.columns(2)
-    m1.metric("Median packing labour per outlet per month (packer-hours)", f"{ref['hours_per_outlet']:,.0f}")
+    m1.metric("Median packer-hours per outlet per month", f"{ref['hours_per_outlet']:,.0f}",
+              help="Packing labour time: hours × number of packers, summed per outlet per month, then the median across outlets.")
     m2.metric("Median cartons per outlet per month", f"{ref['cartons_per_outlet']:,.0f}")
-
+    
     m3, m4 = st.columns(2)
     m3.metric("Average cartons per outlet per month", f"{ref['avg_cartons_per_month']:,.0f}")
     m4.metric(f"Average cartons per outlet in {year}", f"{ref['avg_cartons_year']:,.0f}")
